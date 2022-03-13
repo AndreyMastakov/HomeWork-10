@@ -9,6 +9,7 @@ candidates = utils.load_candidates()
 
 @app.route("/")
 def page_index():
+    """Создания списка кандидатов для роута в формате (тег <pre>)"""
     str_candidates = '<pre>'
     for candidate in candidates.values():
         str_candidates += f'{candidate["name"]} \n{candidate["position"]} \n{candidate["skills"]} \n\n'
@@ -18,6 +19,7 @@ def page_index():
 
 @app.route("/candidates/<int:id>")
 def profile(id):
+    """Создание отдельной страницы для каждого кандидата с изображением"""
     candidate = candidates[id]
     str_candidates = f'<img src={candidate["picture"]}></img> <br><br>{candidate["name"]} <br>{candidate["position"]}' \
                      f' <br>{candidate["skills"]} <br><br>'
@@ -26,6 +28,7 @@ def profile(id):
 
 @app.route("/skills/<skill>")
 def skills(skill):
+    """Поиск кандидатов по их навыкам"""
     str_candidates = '<pre>'
     for candidate in candidates.values():
         candidate_skills = candidate['skills'].split(', ')
